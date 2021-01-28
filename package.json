@@ -1,0 +1,17 @@
+{
+	"id":"com.moimz.minitalk.plugin.clear",
+	"icon":"mi mi-trash",
+	"title":{
+		"ko":"화면비우기 플러그인"
+	},
+	"version":"1.0.0",
+	"description":{
+		"ko":"채팅창의 내용을 지웁니다."
+	},
+	"author":{
+		"name":"Arzz",
+		"email":"arzz@arzz.com"
+	},
+	"homepage":"https://www.minitalk.io",
+	"language":"ko"
+}
