@@ -22,9 +22,9 @@ me.clear = function(minitalk,from) {
 	
 	$chat.empty();
 	if (from !== undefined) {
-		Minitalk.ui.printSystemMessage("info",from.nickname + "님이 화면을 비웠습니다.");
+		minitalk.ui.printSystemMessage("info",from.nickname + "님이 화면을 비웠습니다.");
 	} else {
-		Minitalk.ui.printSystemMessage("info","화면을 비웠습니다.");
+		minitalk.ui.printSystemMessage("info","화면을 비웠습니다.");
 	}
 	
 	// 새로고침했을때 이전대화를 가져오지 않도록 저장된 로그데이터를 비운다.
@@ -33,14 +33,14 @@ me.clear = function(minitalk,from) {
 	logs.messages = [];
 	logs.latest = moment().valueOf();
 	
-	Minitalk.session("logs",logs);
+	minitalk.session("logs",logs);
 };
 
 Minitalk.on("init",function(minitalk) {
 	/**
 	 * 툴바에 버튼을 추가한다.
 	 */
-	Minitalk.ui.appendTool({
+	minitalk.ui.appendTool({
 		tool:"clear",
 		text:"화면비우기",
 		iconClass:"mi mi-trash",
@@ -51,7 +51,7 @@ Minitalk.on("init",function(minitalk) {
 			if (minitalk.user.me.level == 9) {
 				if (confirm("전체접속자의 화면을 비우시겠습니까? 아니오를 선택하면 나의 채팅화면만 비웁니다.") == true) {
 					// 서버에 프로토콜을 전송한다.
-					Minitalk.socket.sendProtocol("clear");
+					minitalk.socket.sendProtocol("clear");
 				}
 			}
 			
@@ -63,7 +63,7 @@ Minitalk.on("init",function(minitalk) {
 	/**
 	 * 프로토콜을 정의한다.
 	 */
-	Minitalk.socket.setProtocol("clear",function(minitalk,data,to,from) {
+	minitalk.socket.setProtocol("clear",function(minitalk,data,to,from) {
 		// 프로토콜을 전송한 유저가 관리자인지 확인한다.
 		if (from.level !== 9) return;
 		
