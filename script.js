@@ -6,8 +6,8 @@
  * @file /plugins/clear/script.js
  * @author Arzz (arzz@arzz.com)
  * @license MIT License
- * @version 1.0.0
- * @modified 2021. 1. 28.
+ * @version 1.1.0
+ * @modified 2021. 4. 15.
  */
 if (Minitalk === undefined) return;
 
@@ -49,14 +49,27 @@ Minitalk.on("init",function(minitalk) {
 			 * 채널관리자인 경우 전체접속자의 화면을 비울지 확인한다.
 			 */
 			if (minitalk.user.me.level == 9) {
-				if (confirm("전체접속자의 화면을 비우시겠습니까? 아니오를 선택하면 나의 채팅화면만 비웁니다.") == true) {
-					// 서버에 프로토콜을 전송한다.
-					minitalk.socket.sendProtocol("clear");
-				}
+				minitalk.ui.showAlert("안내","나의 채팅화면 비우기와 함께 전체 접속자의 채팅화면도 함께 비우시겠습니까?",[{
+					text:"나만 비우기",
+					class:"cancel",
+					handler:function() {
+						minitalk.ui.closeAlert();
+						
+						// 화면을 비운다.
+						me.clear(minitalk);
+					}
+				},{
+					text:"전체유저 비우기",
+					handler:function() {
+						// 서버에 프로토콜을 전송한다.
+						minitalk.socket.sendProtocol("clear");
+						minitalk.ui.closeAlert();
+						
+						// 화면을 비운다.
+						me.clear(minitalk);
+					}
+				}]);
 			}
-			
-			// 화면을 비운다.
-			me.clear(minitalk);
 		}
 	});
 	
