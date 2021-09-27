@@ -6,8 +6,8 @@
  * @file /plugins/clear/script.js
  * @author Arzz (arzz@arzz.com)
  * @license MIT License
- * @version 1.1.0
- * @modified 2021. 4. 15.
+ * @version 1.2.0
+ * @modified 2021. 9. 27.
  */
 if (Minitalk === undefined) return;
 
@@ -28,7 +28,7 @@ me.clear = function(minitalk,from) {
 	}
 	
 	// 새로고침했을때 이전대화를 가져오지 않도록 저장된 로그데이터를 비운다.
-	var logs = Minitalk.session("logs");
+	var logs = Minitalk.session("logs") ? Minitalk.session("logs") : {};
 	logs.ids = {};
 	logs.messages = [];
 	logs.latest = moment().valueOf();
@@ -69,7 +69,12 @@ Minitalk.on("init",function(minitalk) {
 						me.clear(minitalk);
 					}
 				}]);
+				
+				return;
 			}
+			
+			// 화면을 비운다.
+			me.clear(minitalk);
 		}
 	});
 	
