@@ -6,7 +6,7 @@
  * @file /plugins/clear/script.js
  * @author Arzz (arzz@arzz.com)
  * @license MIT License
- * @version 1.2.0
+ * @version 2.0.0
  * @modified 2021. 9. 27.
  */
 if (Minitalk === undefined) return;
@@ -17,7 +17,7 @@ if (Minitalk === undefined) return;
 me.clear = function(minitalk,from) {
 	var $frame = $("div[data-role=frame]");
 	var $main = $("main",$frame);
-	var $chat = $("section[data-role=chat]",$main);
+	var $chat = $("section[data-section=chat]",$main);
 	if ($chat.length == 0) return;
 	
 	$chat.empty();
